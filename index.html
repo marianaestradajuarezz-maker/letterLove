@@ -12,26 +12,26 @@
     }
 
     body {
-      background-color: #2b1b22;
-      font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       min-height: 100vh;
       overflow: hidden;
-      color: #ffffff;
     }
 
     /* 💌 CONTENEDOR PRINCIPAL QUE OCUPA TODA LA PANTALLA */
     .carta-container {
       width: 100vw;
       height: 100vh;
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       overflow: hidden;
+      background-color: #2b1b22;
+      z-index: 10;
       transition: opacity 0.5s ease;
     }
 
@@ -66,7 +66,7 @@
       100% { transform: scale(1); }
     }
 
-    /* 🌧️ LLUVIA DE CORAZONES (💕,💞,💖,💘,💗) */
+    /* 🌧️ LLUVIA DE CORAZONES */
     .corazon-lluvia {
       position: absolute;
       top: -40px;
@@ -137,9 +137,9 @@
       font-weight: bold;
       margin-bottom: 15px;
       text-shadow: 1px 1px 0px #ffffff;
+      font-family: 'Courier New', Courier, monospace;
     }
 
-    /* GIF DEL OSITO */
     .gif-osito-beso {
       width: 100%;
       max-width: 600px;
@@ -151,7 +151,7 @@
     .btn-cerrar {
       background-color: #ff94b4;
       color: #ffffff;
-      font-family: inherit;
+      font-family: 'Courier New', Courier, monospace;
       font-size: 1.2rem;
       font-weight: bold;
       border: 3px solid #ffffff;
@@ -167,70 +167,29 @@
       box-shadow: 0 1px 0px #d87093;
     }
 
-    /* 🌸 PANTALLA FINAL DE AGRADECIMIENTO */
+    /* 🌸 PANTALLA BLANCA FINAL SÚPER MINIMALISTA (IGUAL A LA IMAGEN) */
     .pantalla-agradecimiento {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: #2b1b22;
+      background-color: #ffffff;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      z-index: 200;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.8s ease;
+      align-items: flex-start;
+      padding-top: 50px;
+      padding-left: 20px;
+      padding-right: 20px;
+      z-index: 1;
       text-align: center;
-      padding: 20px;
     }
 
-    .pantalla-agradecimiento.activa {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .tarjeta-final {
-      background-color: rgba(255, 209, 220, 0.15);
-      border: 3px dashed #ff94b4;
-      padding: 35px 25px;
-      border-radius: 25px;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      max-width: 420px;
-      width: 90%;
-      animation: flotarTarjeta 3s infinite ease-in-out;
-    }
-
-    @keyframes flotarTarjeta {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .tarjeta-final h1 {
-      font-size: 2rem;
-      color: #ff94b4;
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .tarjeta-final p {
-      font-size: 1.1rem;
-      color: #ffe4e1;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .corazon-final {
-      font-size: 3.5rem;
-      animation: latido 1.2s infinite ease-in-out;
-    }
-
-    @keyframes latido {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.25); }
+    .texto-final {
+      color: #ff4d6d;
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -239,13 +198,13 @@
   <!-- 💌 VISTA DE LA CARTA DE FONDO -->
   <div class="carta-container" id="carta-principal" onclick="abrirCarta()">
     <img src="https://i.ibb.co/MkfBpnqN/carta-ezgif-com-remove-background.gif" alt="Carta para Jorgito" class="gif-carta">
-    <div class="indicacion-clic">¡Tap! ✨</div>
+    <div class="indicacion-clic">¡Tap!✨</div>
   </div>
 
   <!-- 📦 CAJA DE TEXTO BONITA (MODAL) -->
   <div class="modal-overlay" id="modal-mensaje">
     <div class="caja-mensaje">
-      <h2 class="titulo-mensaje">Mi Jorgito Lindo 💕</h2>
+      <h2 class="titulo-mensaje">Mi Jorgito lindo. 💕</h2>
       
       <!-- GIF DEL OSITO DANDO UN BESO -->
       <img src="https://i.ibb.co/NgMVcv8d/beso-ezgif-com-remove-background.gif" alt="Osito beso" class="gif-osito-beso">
@@ -255,13 +214,9 @@
     </div>
   </div>
 
-  <!-- 🌸 PANTALLA FINAL DE AGRADECIMIENTO -->
-  <div class="pantalla-agradecimiento" id="pantalla-final">
-    <div class="tarjeta-final">
-      <h1>✨💖</h1>
-      <p>Con amor para ti.💞</p>
-      <div class="corazon-final">💖</div>
-    </div>
+  <!-- 🌸 PANTALLA FINAL TAL CUAL LA FOTO -->
+  <div class="pantalla-agradecimiento">
+    <p class="texto-final">¡Gracias por leer! Ya puedes cerrar esta pestañita. 💕</p>
   </div>
 
   <script>
@@ -300,14 +255,13 @@
     function cerrarYMostrarAgradecimiento(event) {
       event.stopPropagation();
 
-      // Cierra el modal y detiene los corazones
+      // Oculta el modal y detiene la lluvia
       document.getElementById('modal-mensaje').classList.remove('activo');
       detenerLluviaCorazones();
 
-      // Muestra la pantalla final con animación
+      // Desaparece la carta para dejar ver la pantalla blanca final
       setTimeout(() => {
-        document.getElementById('carta-principal').style.opacity = '0';
-        document.getElementById('pantalla-final').classList.add('activa');
+        document.getElementById('carta-principal').style.display = 'none';
       }, 300);
     }
   </script>
