@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jorgito el curioso.💕</title>
+  <title>Mi Jorgito el curioso.💕</title>
   <style>
     * {
       box-sizing: border-box;
@@ -33,11 +33,11 @@
       overflow: hidden;
     }
 
-    /* GIF DE LA CARTA EN FONDO (Reemplaza la URL cuando me mandes la tuya) */
+    /* GIF DE LA CARTA BIEN GRANDE EN EL FONDO */
     .gif-carta {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* Cambia a 'cover' si quieres que llene la pantalla por completo */
       display: block;
     }
 
@@ -45,7 +45,7 @@
     .indicacion-clic {
       position: absolute;
       bottom: 40px;
-      background-color: rgba(255, 182, 193, 0.9);
+      background-color: rgba(255, 182, 193, 0.95);
       color: #ffffff;
       padding: 12px 24px;
       border-radius: 25px;
@@ -68,7 +68,7 @@
     .corazon-lluvia {
       position: absolute;
       top: -40px;
-      font-size: 1.8rem;
+      font-size: 2rem;
       user-select: none;
       pointer-events: none;
       z-index: 100;
@@ -93,7 +93,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: rgba(0, 0, 0, 0.65);
+      background-color: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(4px);
       display: flex;
       justify-content: center;
@@ -114,8 +114,8 @@
       border: 4px solid #ff94b4;
       border-radius: 25px;
       padding: 25px;
-      width: 88%;
-      max-width: 380px;
+      width: 90%;
+      max-width: 600px; /* Ventana más ancha para alojar el osito más grande */
       text-align: center;
       box-shadow: 0 10px 30px rgba(255, 148, 180, 0.5);
       transform: scale(0.7);
@@ -130,16 +130,17 @@
     }
 
     .titulo-mensaje {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       color: #2b1b22;
       font-weight: bold;
       margin-bottom: 15px;
       text-shadow: 1px 1px 0px #ffffff;
     }
 
+    /* GIF DEL OSITO MÁS GRANDE */
     .gif-osito-beso {
       width: 100%;
-      max-width: 600px;
+      max-width: 340px; /* ¡Más grande! */
       height: auto;
       border-radius: 15px;
       margin-bottom: 20px;
@@ -149,10 +150,10 @@
       background-color: #ff94b4;
       color: #ffffff;
       font-family: inherit;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: bold;
       border: 3px solid #ffffff;
-      padding: 10px 25px;
+      padding: 12px 30px;
       border-radius: 20px;
       cursor: pointer;
       box-shadow: 0 4px 0px #d87093;
@@ -163,18 +164,14 @@
       transform: translateY(3px);
       box-shadow: 0 1px 0px #d87093;
     }
-
-    .oculto {
-      display: none !important;
-    }
   </style>
 </head>
 <body>
 
-  <!-- 💌 BOTÓN EN TODA LA PANTALLA -->
+  <!-- 💌 BOTÓN EN TODA LA PANTALLA CON TU CARTA -->
   <div class="carta-container" onclick="abrirCarta()">
-    <!-- ⚠️ AQUÍ REEMPLAZAS LA URL POR LA DE TU GIF DE LA CARTA CUANDO LA TENGAS -->
-https://i.ibb.co/MkfBpnqN/carta-ezgif-com-remove-background.gif ¡Tap! ✨</div>
+    <img src="https://i.ibb.co/MkfBpnqN/carta-ezgif-com-remove-background.gif" alt="Carta para Jorgito" class="gif-carta">
+    <div class="indicacion-clic">¡Toca en cualquier parte para abrir la carta! ✉️✨</div>
   </div>
 
   <!-- 📦 CAJA DE TEXTO BONITA (MODAL) -->
@@ -203,24 +200,23 @@ https://i.ibb.co/MkfBpnqN/carta-ezgif-com-remove-background.gif ¡Tap! ✨</div>
     }
 
     function iniciarLluviaCorazones() {
-      // Si ya existía una lluvia previa, la limpiamos
       if (intervaloCorazones) clearInterval(intervaloCorazones);
 
       intervaloCorazones = setInterval(() => {
         const corazon = document.createElement('div');
         corazon.classList.add('corazon-lluvia');
         
-        // Selecciona uno de los corazones de la lista al azar
+        // Selecciona uno de los 5 corazones al azar
         const corazonRandom = listaCorazones[Math.floor(Math.random() * listaCorazones.length)];
         corazon.innerHTML = corazonRandom;
 
-        // Posición y duración aleatoria
+        // Posición y velocidad aleatorias
         corazon.style.left = Math.random() * 95 + '%';
         corazon.style.animationDuration = (Math.random() * 2.5 + 2.5) + 's';
         
         document.body.appendChild(corazon);
 
-        // Eliminar del DOM después de caer
+        // Limpiar del DOM al caer
         setTimeout(() => corazon.remove(), 5500);
       }, 300);
     }
@@ -231,17 +227,13 @@ https://i.ibb.co/MkfBpnqN/carta-ezgif-com-remove-background.gif ¡Tap! ✨</div>
     }
 
     function cerrarMensaje(event) {
-      // Evitamos que al dar clic en cerrar se vuelva a abrir la carta
       event.stopPropagation();
 
-      // Cierra la ventana y detiene corazones
       document.getElementById('modal-mensaje').classList.remove('activo');
       detenerLluviaCorazones();
 
-      // Alerta con mensaje super bonito
       setTimeout(() => {
-        alert("¡Gracias por leer tu cartita, Jorgito. 💖");
-        // Intentar cerrar la pestaña del navegador
+        alert("¡Gracias por leer tu cartita, Jorgito emocho.💖");
         window.close();
       }, 300);
     }
