@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jorgito el curioso.💕</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #2b1b22;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 💌 CONTENEDOR PRINCIPAL QUE OCUPA TODA LA PANTALLA */
+    .carta-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    /* GIF DE LA CARTA EN FONDO (Reemplaza la URL cuando me mandes la tuya) */
+    .gif-carta {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* TEXTO DE INSTRUCCIÓN FLOTANTE */
+    .indicacion-clic {
+      position: absolute;
+      bottom: 40px;
+      background-color: rgba(255, 182, 193, 0.9);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #d87093;
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      animation: pulsoTexto 1.8s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes pulsoTexto {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* 🌧️ LLUVIA DE CORAZONES (💕,💞,💖,💘,💗) */
+    .corazon-lluvia {
+      position: absolute;
+      top: -40px;
+      font-size: 1.8rem;
+      user-select: none;
+      pointer-events: none;
+      z-index: 100;
+      animation: caerCorazon linear infinite;
+    }
+
+    @keyframes caerCorazon {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+
+    /* 📦 MODAL / CAJA DE TEXTO BONITA */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal-overlay.activo {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .caja-mensaje {
+      background-color: #ffd1dc;
+      border: 4px solid #ff94b4;
+      border-radius: 25px;
+      padding: 25px;
+      width: 88%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 148, 180, 0.5);
+      transform: scale(0.7);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-overlay.activo .caja-mensaje {
+      transform: scale(1);
+    }
+
+    .titulo-mensaje {
+      font-size: 1.6rem;
+      color: #2b1b22;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 0px #ffffff;
+    }
+
+    .gif-osito-beso {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .btn-cerrar {
+      background-color: #ff94b4;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: 3px solid #ffffff;
+      padding: 10px 25px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 0px #d87093;
+      transition: all 0.2s ease;
+    }
+
+    .btn-cerrar:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0px #d87093;
+    }
+
+    .oculto {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 💌 BOTÓN EN TODA LA PANTALLA -->
+  <div class="carta-container" onclick="abrirCarta()">
+    <!-- ⚠️ AQUÍ REEMPLAZAS LA URL POR LA DE TU GIF DE LA CARTA CUANDO LA TENGAS -->
+https://i.ibb.co/MkfBpnqN/carta-ezgif-com-remove-background.gif ¡Tap! ✨</div>
+  </div>
+
+  <!-- 📦 CAJA DE TEXTO BONITA (MODAL) -->
+  <div class="modal-overlay" id="modal-mensaje">
+    <div class="caja-mensaje">
+      <h2 class="titulo-mensaje">Mi Jorgito lindo. 💕</h2>
+      
+      <!-- GIF DEL OSITO DANDO UN BESO -->
+      <img src="https://i.ibb.co/NgMVcv8d/beso-ezgif-com-remove-background.gif" alt="Osito beso" class="gif-osito-beso">
+      
+      <!-- BOTÓN CERRAR -->
+      <button class="btn-cerrar" onclick="cerrarMensaje(event)">Cerrar ❣️</button>
+    </div>
+  </div>
+
+  <script>
+    let intervaloCorazones;
+    const listaCorazones = ['💕', '💞', '💖', '💘', '💗'];
+
+    function abrirCarta() {
+      // Abre el modal bonito
+      document.getElementById('modal-mensaje').classList.add('activo');
+      
+      // Inicia la lluvia de corazones
+      iniciarLluviaCorazones();
+    }
+
+    function iniciarLluviaCorazones() {
+      // Si ya existía una lluvia previa, la limpiamos
+      if (intervaloCorazones) clearInterval(intervaloCorazones);
+
+      intervaloCorazones = setInterval(() => {
+        const corazon = document.createElement('div');
+        corazon.classList.add('corazon-lluvia');
+        
+        // Selecciona uno de los corazones de la lista al azar
+        const corazonRandom = listaCorazones[Math.floor(Math.random() * listaCorazones.length)];
+        corazon.innerHTML = corazonRandom;
+
+        // Posición y duración aleatoria
+        corazon.style.left = Math.random() * 95 + '%';
+        corazon.style.animationDuration = (Math.random() * 2.5 + 2.5) + 's';
+        
+        document.body.appendChild(corazon);
+
+        // Eliminar del DOM después de caer
+        setTimeout(() => corazon.remove(), 5500);
+      }, 300);
+    }
+
+    function detenerLluviaCorazones() {
+      clearInterval(intervaloCorazones);
+      document.querySelectorAll('.corazon-lluvia').forEach(c => c.remove());
+    }
+
+    function cerrarMensaje(event) {
+      // Evitamos que al dar clic en cerrar se vuelva a abrir la carta
+      event.stopPropagation();
+
+      // Cierra la ventana y detiene corazones
+      document.getElementById('modal-mensaje').classList.remove('activo');
+      detenerLluviaCorazones();
+
+      // Alerta con mensaje super bonito
+      setTimeout(() => {
+        alert("¡Gracias por leer tu cartita, Jorgito. 💖");
+        // Intentar cerrar la pestaña del navegador
+        window.close();
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
